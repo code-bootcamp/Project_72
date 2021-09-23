@@ -8,6 +8,7 @@ import {CREATE_BOARD} from './boardWrite.queries';
 import {useContext} from 'react';
 import {GlobalContext} from '../../../../../../App';
 import {Alert} from 'react-native';
+import {FETCH_BOARDS} from '../list/boardList.queries';
 
 export const BoardContext = createContext({});
 
@@ -32,6 +33,7 @@ const BoardWrite = (props: any) => {
             images: image,
           },
         },
+        refetchQueries: [{query: FETCH_BOARDS}],
       });
       Alert.alert('게시물이 등록되었습니다.');
       props.navigation.navigate('List');
