@@ -17,8 +17,6 @@ export default function RoomScreen({route}: any) {
 
   const {thread} = route.params;
 
-  console.log('라우트', route);
-
   const [messages, setMessages] = useState();
 
   async function handleSend(messages: any) {

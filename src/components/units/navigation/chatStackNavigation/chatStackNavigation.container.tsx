@@ -27,20 +27,7 @@ export default function ChatStackNavigationPage() {
           fontWeight: 'bold',
         },
       }}>
-      <ModalStack.Screen
-        name="채팅리스트"
-        component={ChatListScreen}
-        // options={({navigation}) => ({
-        //   headerRight: () => (
-        //     <Icon
-        //       name="chatbubbles-sharp"
-        //       size={28}
-        //       color="#ffffff"
-        //       onPress={() => navigation.navigate('AddRoom')}
-        //     />
-        //   ),
-        // })}
-      />
+      <ModalStack.Screen name="채팅리스트" component={ChatListScreen} />
       <ModalStack.Screen name="AddRoom" component={AddRoomScreen} />
       <ModalStack.Screen
         name="Room"

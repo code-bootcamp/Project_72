@@ -21,6 +21,7 @@ interface ILoginDate {
 }
 
 export const GlobalContext = createContext<ILoginDate>({});
+export const GlobalContext = createContext({});
 
 interface IUserInfo {
   _id?: string;

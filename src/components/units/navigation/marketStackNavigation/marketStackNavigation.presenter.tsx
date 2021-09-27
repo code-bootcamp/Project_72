@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MarketListPage from '../../../../../pages/screens/market';
 import MarketDetailPage from '../../../../../pages/screens/market/[marketId]';
@@ -6,12 +6,12 @@ import MarketWritePage from '../../../../../pages/screens/market/new';
 import RoomScreen from '../../screens/chat/room/chatRoomScreen';
 import DialogPage from '../../../commons/dialog/dialog';
 import ChatListScreen from '../../screens/chat/list/chatListScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {GlobalContext} from '../../../../../App';
 import FinshScreen from '../../screens/chat/finish/finishScreen';
+import {GlobalContext} from '../../../../../App';
 
 const Stack = createNativeStackNavigator();
 const MarketStackNavigationUI = () => {
+  const {userInfo} = useContext(GlobalContext);
   return (
     <>
       <Stack.Navigator screenOptions={() => ({headerShown: false})}>
@@ -19,7 +19,7 @@ const MarketStackNavigationUI = () => {
           name="List"
           component={MarketListPage}
           options={() => ({
-            title: '중고마켓',
+            title: '중고장터',
             headerShown: true,
             headerStyle: {
               backgroundColor: '#26EBA6',
@@ -65,14 +65,6 @@ const MarketStackNavigationUI = () => {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
-            // headerRight: () => (
-            //   <Icon
-            //     name="chatbubbles-sharp"
-            //     size={28}
-            //     color="#ffffff"
-            //     onPress={() => navigation.navigate('AddRoom')}
-            //   />
-            // ),
           })}
         />
       </Stack.Navigator>

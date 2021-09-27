@@ -1,18 +1,25 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Dialog from 'react-native-dialog';
 import {GlobalContext} from '../../../../App';
-import FinshScreen from '../../units/screens/chat/finish/finishScreen';
 
 export default function DialogPage(props) {
+  const {userInfo} = useContext(GlobalContext);
   const [visible, setVisible] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [routeData, setRouteData] = useState('');
 
-  // console.log('프롭스', props.route.params.thread.title);
-  console.log('프롭스', routeData);
+  const userName = props.route.params.thread;
 
-  const {userInfo} = useContext(GlobalContext);
+  console.log('라우트', routeData);
+
+  useEffect(() => {
+    if (userInfo.name === userName.myName) {
+      setRouteData(userName.sellerName);
+    } else {
+      setRouteData(userName.myName);
+    }
+  }, []);
 
   const showDialog = () => {
     setVisible(true);
@@ -30,8 +37,7 @@ export default function DialogPage(props) {
   const handleFinish = () => {
     setIsStart(false);
     setVisible(false);
-    setRouteData(props.route.params.thread.title);
-    props.navigation.navigate('Finish');
+    props.navigation.navigate('Finish', routeData);
   };
 
   return (
@@ -44,16 +50,10 @@ export default function DialogPage(props) {
         <Dialog.Description>
           {isStart
             ? ' 산책을 종료하시겠습니까? '
-            : '즐거운 산책을 시작하시겠습니까?'}
+            : `${routeData} 님과 즐거운 산책을 시작하시겠습니까?`}
         </Dialog.Description>
         <Dialog.Button label="아니오" onPress={handleCancel} />
-        {/* <Dialog.Button label="네" onPress={isStart ? handleFinish : handleOk} /> */}
-        <Dialog.Button
-          label="네"
-          onPress={() => {
-            handleFinish(routeData);
-          }}
-        />
+        <Dialog.Button label="네" onPress={isStart ? handleFinish : handleOk} />
       </Dialog.Container>
     </View>
   );

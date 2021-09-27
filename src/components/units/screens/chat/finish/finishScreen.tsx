@@ -8,13 +8,10 @@ import {
 } from 'react-native';
 import {Image, Center, NativeBaseProvider, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {GlobalContext} from '../../../../../../App';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default function FinshScreen(props: any) {
-  const {userInfo}: any = useContext(GlobalContext);
-
-  console.log('rrrr', props);
+  const userName = props.route.params;
 
   const [isLike, setIsLike] = useState(false);
   const [isDisLike, setIsDisLike] = useState(false);
@@ -61,17 +58,17 @@ export default function FinshScreen(props: any) {
         </Center>
         <View style={styles.bodyWrapper}>
           <View style={styles.contentsWrapper}>
-            <Text style={styles.highlightText}>{userInfo.name}</Text>
-            <Text style={styles.textStyle}> 님과 함께</Text>
+            <Text style={styles.highlightText}>{userName}</Text>
+            <Text style={styles.textStyle}> 님 과</Text>
             <Text style={styles.highlightText}>1,029</Text>
-            <Text style={styles.textStyle}> m 를 걸으셨군요!</Text>
+            <Text style={styles.textStyle}> m 를 산책하셨군요!</Text>
           </View>
           <View style={styles.contentsWrapper}>
             <Text style={styles.highlightText}>100</Text>
             <Text style={styles.textStyle}> Point가 적립되었습니다!</Text>
           </View>
           <View style={styles.contentsWrapper}>
-            <Text style={styles.highlightText}>{userInfo.name}</Text>
+            <Text style={styles.highlightText}>{userName}</Text>
             <Text style={styles.textStyle}> 님을 평가해주세요!</Text>
           </View>
         </View>
