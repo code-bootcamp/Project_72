@@ -12,10 +12,15 @@ import {createUploadLink} from 'apollo-upload-client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LandingPage from './pages/screens/landing';
 import RegistStackNavigationPage from './pages/navigation/RegistStackNavigation';
-import {assertSchema} from 'graphql';
-import ImageTest from './src/components/commons/test';
 
-export const GlobalContext = createContext({});
+interface ILoginDate {
+  accessToken?: string;
+  userInfo?: string;
+  setUserInfo?: any | undefined;
+  setAccessToken?: any | undefined;
+}
+
+export const GlobalContext = createContext<ILoginDate>({});
 
 interface IUserInfo {
   _id?: string;
@@ -24,7 +29,7 @@ interface IUserInfo {
   petGender?: string;
   petKinds?: string;
   petName?: string;
-  picture?: string
+  picture?: string;
 }
 
 function App() {
@@ -75,11 +80,7 @@ function App() {
     <>
       <GlobalContext.Provider value={value}>
         <ApolloProvider client={client}>
-          {/* <ImageTest /> */}
-          {
-            isLoading && <LandingPage setIsLoading={setIsLoading} />
-            //isLoading && fadeinview
-          }
+          {isLoading && <LandingPage setIsLoading={setIsLoading} />}
           {!isLoading &&
             (userInfo ? (
               <>

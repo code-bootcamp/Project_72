@@ -12,7 +12,6 @@ const Regist02 = (props: any) => {
   const onPreessSelectFemale = () => {
     setPetGender('female');
   };
-  console.log(petGender);
   return (
     <Regist02UI
       petName={props.petName}

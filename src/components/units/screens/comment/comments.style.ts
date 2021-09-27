@@ -43,7 +43,7 @@ export const CommentsRightWrapper = styled.View`
   padding-left: 20px;
 `;
 export const CommentsContents = styled.Text`
-  width: 245px;
+  width: 230px;
   font-size: 16px;
 `;
 export const WriteCommentWrapper = styled.View`

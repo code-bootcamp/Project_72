@@ -4,7 +4,6 @@ import {
   ButtonWrapper,
   Container,
   SubmitButton,
-  AddImageButton,
   Title,
   TitleWrapper,
   Wrapper,
@@ -25,7 +24,7 @@ const Regist03UI = (props: any) => {
               onPress={() => {
                 props.onUpdatePetInfo();
               }}>
-              <ButtonText>다 음</ButtonText>
+              <ButtonText>완 료</ButtonText>
             </SubmitButton>
           </ButtonWrapper>
         </Wrapper>

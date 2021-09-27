@@ -1,7 +1,4 @@
 import React from 'react';
-import {useContext} from 'react';
-import {Controller} from 'react-hook-form';
-import {PetInfoContext} from '../../../navigation/registStackNavigation/registStackNavigation.container';
 import {
   ButtonText,
   Container,
