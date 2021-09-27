@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import {Image, Center, NativeBaseProvider, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default function FinshScreen(props: any) {

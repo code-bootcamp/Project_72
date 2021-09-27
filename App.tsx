@@ -16,6 +16,7 @@ import {assertSchema} from 'graphql';
 import ImageTest from './src/components/commons/test';
 
 export const GlobalContext = createContext({});
+console.disableYellowBox = true;
 
 interface IUserInfo {
   _id?: string;
@@ -24,7 +25,7 @@ interface IUserInfo {
   petGender?: string;
   petKinds?: string;
   petName?: string;
-  picture?: string
+  picture?: string;
 }
 
 function App() {
