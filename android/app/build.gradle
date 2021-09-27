@@ -186,6 +186,7 @@ dependencies {
     
     // implementation 'com.google.firebase:firebase-admin:8.0.1'
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    
 
     implementation 'com.google.firebase:firebase-analytics'
     // When using the BoM, you don't specify versions in Firebase library dependencies
@@ -235,4 +236,8 @@ project.ext.vectoricons = [
     iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf','Ionicons.ttf', 'FontAwesome.ttf' ] // Name of the font files you want to copy
 ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
 apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.android.application'
+

@@ -10,7 +10,7 @@ import ChatStackNavigationPage from '../../../../../pages/navigation/ChatStackNa
 const Tab = createBottomTabNavigator();
 const MainBottomTabNavigationUI = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Tab.Navigator
         screenOptions={({route}) => ({
           tabBarIcon: ({color}) => {

@@ -7,11 +7,16 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
-// import {GlobalContext} from '../../../../../../App';
+import {FETCH_USER_LOGGED_IN, LOGIN_USER_WITH_FB} from '../MainLogin.queries';
+import {useApolloClient, useMutation} from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {GlobalContext} from '../../../../../../App';
 
 const SocialLogin = () => {
+  const {setUserInfo, setAccessToken} = useContext(GlobalContext);
   const [loggedIn, setLoggedIn] = useState(true);
-  const [userInfo, setuserInfo] = useState([]);
+  const client = useApolloClient();
+  const [loginUserWithFB] = useMutation(LOGIN_USER_WITH_FB); // 소셜 로그인
 
   const onGoogleLogin = async () => {
     try {
@@ -20,7 +25,34 @@ const SocialLogin = () => {
       setLoggedIn(true);
 
       const credential = auth.GoogleAuthProvider.credential(idToken);
-      await auth().signInWithCredential(credential);
+      const googleUser = await auth().signInWithCredential(credential);
+
+      const result = await loginUserWithFB({
+        variables: {
+          name: googleUser.additionalUserInfo?.profile?.name,
+          email: googleUser.additionalUserInfo?.profile?.email,
+        },
+      });
+
+      const resultGoogleUser = await client.query({
+        query: FETCH_USER_LOGGED_IN,
+        context: {
+          headers: {
+            authorization: `Bearer ${result.data?.loginUserWithFB.accessToken}`,
+          },
+        },
+      });
+      await AsyncStorage.setItem(
+        'accessToken',
+        result.data.loginUserWithFB.accessToken || '',
+      );
+      AsyncStorage.setItem(
+        'userInfo',
+        JSON.stringify(resultGoogleUser.data.fetchUserLoggedIn) || '',
+      );
+
+      setAccessToken(result.data?.loginUserWithFB.accessToken);
+      setUserInfo(resultGoogleUser.data.fetchUserLoggedIn);
       Alert.alert('소셜 로그인.');
     } catch (error) {
       console.log(error.code);
@@ -65,7 +97,6 @@ const SocialLogin = () => {
 
   return (
     <SocialLoginUi
-      // userInfo={userInfo}
       loggedIn={loggedIn}
       onGoogleLogin={onGoogleLogin}
       onGoogleLogout={onGoogleLogout}

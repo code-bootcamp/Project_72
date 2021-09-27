@@ -1,8 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
-  ModalWrapper,
-  ModalView,
-  AddImage,
   AddImageText,
   AddImageWrapper,
   AddressInput,
@@ -13,32 +10,29 @@ import {
   ErrorText,
   PriceInput,
   SubmitButton,
+  AddressWrapper,
   Address,
+  AddressLabel,
   Title,
   TitleInput,
   TitleWrapper,
   Wrapper,
 } from './marketWrite.style';
-import {Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Controller} from 'react-hook-form';
-const MarketWriteUI = (props) => {
+import {Picker} from 'react-native';
+import Uploads01 from '../../../../commons/uploads/01/uploads01.container';
+import { IMarketWriteUIProps } from './marketWrite.types';
+const MarketWriteUI = (props:IMarketWriteUIProps) => {
   return (
     <>
-      <Modal visible={props.modalVisible}>
-        <ModalWrapper>
-          <ModalView></ModalView>
-        </ModalWrapper>
-      </Modal>
       <Container>
         <Wrapper>
           <TitleWrapper>
             <Title>상품 등록</Title>
           </TitleWrapper>
           <AddImageWrapper>
-            <AddImage>
-              <Icon size={60} color={'#fff'} name="md-add-sharp" />
-            </AddImage>
+            <Uploads01 setImage={props.setImage} />
             <AddImageText>상품 사진을 첨부해주세요</AddImageText>
           </AddImageWrapper>
           <InputWrapper>
@@ -71,12 +65,44 @@ const MarketWriteUI = (props) => {
                 </>
               )}
             />
-
-            <>
-              <AddressInput onPress={props.openModal}>
-                <Address>주소를 검색해주세요</Address>
-              </AddressInput>
-            </>
+            <Controller
+              name="address"
+              control={props.control}
+              render={({field: {onChange, value}}) => (
+                <AddressWrapper>
+                  <Address
+                    selectedValue={value}
+                    onValueChange={(value) => onChange(value)}>
+                    <Picker.Item label="지역을 선택해주세요" />
+                    <Picker.Item label="서울" value="서울" />
+                    <Picker.Item label="경기" value="경기" />
+                    <Picker.Item label="인천" value="인천" />
+                    <Picker.Item label="강원" value="강원" />
+                    <Picker.Item label="충남" value="충남" />
+                    <Picker.Item label="충북" value="충북" />
+                    <Picker.Item label="전남" value="전남" />
+                    <Picker.Item label="전북" value="전북" />
+                    <Picker.Item label="경남" value="경남" />
+                    <Picker.Item label="경북" value="경북" />
+                    <Picker.Item label="제주" value="제주" />
+                  </Address>
+                </AddressWrapper>
+              )}
+            />
+            <Controller
+              name="addressDetail"
+              control={props.control}
+              render={({field: {onChange, value}}) => (
+                <>
+                  <AddressInput
+                    placeholder="상제주소를 입력해주세요"
+                    value={value}
+                    onChangeText={(value) => onChange(value)}
+                  />
+                  <ErrorText>{props.errors?.addressDetail?.message}</ErrorText>
+                </>
+              )}
+            />
 
             <Controller
               name="contents"

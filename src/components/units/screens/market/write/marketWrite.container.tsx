@@ -7,9 +7,13 @@ import {Alert} from 'react-native';
 import MarketWriteUI from './marketWrite.presenter';
 import {CREATE_USED_ITEM} from './marketWrite.queries';
 import {schema} from './marketWrite.validation';
+import {FETCH_USED_ITEMS} from '../list/marketList.queries';
+import {IMarketWriteProps} from './marketWrite.types';
 
-const MarketWrite = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const MarketWrite = (props: {
+  navigation: {navigate: (arg0: string) => void};
+}) => {
+  const [image, setImage] = useState('');
   const [createUseditem] = useMutation(CREATE_USED_ITEM);
   const {control, handleSubmit, formState} = useForm({
     resolver: yupResolver(schema),
@@ -19,26 +23,29 @@ const MarketWrite = () => {
       contents: '',
     },
   });
-  const openModal = () => {
-    setModalVisible(true);
-  };
-  const onSubmit = async (data) => {
-    console.log('data:', data);
+  const onSubmit = async (data: IMarketWriteProps) => {
     try {
-      await createUseditem({
+      const result = await createUseditem({
         variables: {
           createUseditemInput: {
             name: data.name,
             price: data.price,
+            contents: data.contents,
+            images: image,
+            remarks: 'UsedItmes',
             useditemAddress: {
               address: data.address,
+              addressDetail: data.addressDetail,
             },
-            contents: data.contents,
           },
         },
+
+        refetchQueries: [{query: FETCH_USED_ITEMS}],
       });
       console.log('성공');
-    } catch (error) {
+      console.log(result);
+      props.navigation.navigate('List');
+    } catch (error: any) {
       Alert.alert(error.message);
     }
   };
@@ -48,9 +55,7 @@ const MarketWrite = () => {
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       errors={formState.errors}
-      modalVisible={modalVisible}
-      openModal={openModal}
-      setModalVisible={setModalVisible}
+      setImage={setImage}
     />
   );
 };

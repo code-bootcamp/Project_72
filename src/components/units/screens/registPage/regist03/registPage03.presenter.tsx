@@ -4,26 +4,27 @@ import {
   ButtonWrapper,
   Container,
   SubmitButton,
-  AddImageButton,
   Title,
   TitleWrapper,
   Wrapper,
 } from './registPage03.style';
-import Icon from 'react-native-vector-icons/Ionicons';
-const Regist03UI = () => {
+import Uploads02 from '../../../../commons/uploads/02/uploads02.container';
+
+const Regist03UI = (props: any) => {
   return (
     <>
       <Container>
         <Wrapper>
           <TitleWrapper>
-            <Title>@@의 대표 사진을 등록해주세요</Title>
+            <Title>대표 사진을 등록해주세요</Title>
           </TitleWrapper>
-          <AddImageButton>
-            <Icon size={60} color={'#aaa'} name="md-add-sharp" />
-          </AddImageButton>
+          <Uploads02 setImage={props.setImage} />
           <ButtonWrapper>
-            <SubmitButton>
-              <ButtonText>다 음</ButtonText>
+            <SubmitButton
+              onPress={() => {
+                props.onUpdatePetInfo();
+              }}>
+              <ButtonText>완 료</ButtonText>
             </SubmitButton>
           </ButtonWrapper>
         </Wrapper>

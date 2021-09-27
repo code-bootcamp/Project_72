@@ -18,7 +18,10 @@ export const UserInfoWrapper = styled.View`
   align-items: center;
   justify-content: space-between;
 `;
-export const UserImage = styled.View`
+export const UserImage = styled.ImageBackground`
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
   justify-content: center;
   align-items: center;
 `;
@@ -27,6 +30,7 @@ export const UserInfoLeftWrapper = styled.View`
   align-items: center;
 `;
 export const UserName = styled.Text`
+  margin-left:10px;
   font-size: 18px;
 `;
 export const UserInfoRightWrapper = styled.TouchableOpacity``;

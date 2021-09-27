@@ -26,13 +26,22 @@ const MyPageUI = (props: any) => {
 
           <UserInfoWrapper>
             <UserInfoLeftWrapper>
-              <UserImage>
+              <UserImage
+                imageStyle={{
+                  borderTopLeftRadius: 60,
+                  borderTopRightRadius: 60,
+                  borderBottomLeftRadius: 60,
+                  borderBottomRightRadius: 60,
+                }}
+                source={{uri: `${props.data?.fetchUserLoggedIn.picture}`}}
+              />
+              {/* <UserImage>
                 <Icon size={60} color={'#bdbdbd'} name="person-circle-sharp" />
-              </UserImage>
-              <UserName>유저이름</UserName>
+              </UserImage> */}
+              <UserName>{props.data?.fetchUserLoggedIn.name}</UserName>
             </UserInfoLeftWrapper>
             <UserInfoRightWrapper onPress={props.onPressLogout}>
-              <UserInfoEdit>내 정보 수정</UserInfoEdit>
+              <UserInfoEdit>로그아웃</UserInfoEdit>
             </UserInfoRightWrapper>
           </UserInfoWrapper>
 

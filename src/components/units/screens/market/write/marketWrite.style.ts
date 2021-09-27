@@ -1,15 +1,4 @@
 import styled from 'styled-components/native';
-export const ModalWrapper = styled.View`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.1);
-  justify-content: center;
-  align-items: center;
-`;
-export const ModalView = styled.View`
-  width: 300px;
-  height: 300px;
-  background-color: gray;
-`;
 export const Container = styled.SafeAreaView``;
 export const Wrapper = styled.ScrollView``;
 export const TitleWrapper = styled.View`
@@ -56,15 +45,22 @@ export const PriceInput = styled.TextInput`
   border-bottom-width: 1.5px;
   border-bottom-color: #e0e0e0;
 `;
-export const AddressInput = styled.TouchableOpacity`
+export const AddressInput = styled.TextInput`
   padding: 15px 3px;
   flex-direction: row;
   justify-content: space-between;
   border-bottom-width: 1.5px;
   border-bottom-color: #e0e0e0;
 `;
-export const Address = styled.Text`
-  color: #999;
+export const AddressLabel = styled.Text`
+  color: #8f8f8f;
+`;
+export const AddressWrapper = styled.View`
+  border-bottom-width: 1.5px;
+  border-bottom-color: #e0e0e0;
+`;
+export const Address = styled.Picker`
+  color: #9f9f9f;
 `;
 export const ContentsInput = styled.TextInput``;
 export const SubmitButton = styled.TouchableOpacity`

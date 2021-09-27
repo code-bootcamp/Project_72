@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {Animated} from 'react-native';
 import {Container, Wrapper} from './landingPage.style';
+import { ILandingPage } from './landingPage.types';
 
 const FadeInView = (props: any) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -8,9 +9,11 @@ const FadeInView = (props: any) => {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 5000,
+      duration: 3000,
       useNativeDriver: true,
-    }).start();
+    }).start(() => {
+      props.setIsLoading(false);
+    });
   }, [fadeAnim]);
 
   return (
@@ -23,10 +26,10 @@ const FadeInView = (props: any) => {
     </Animated.View>
   );
 };
-export default () => {
+export default (props:ILandingPage) => {
   return (
     <Container>
-      <FadeInView>
+      <FadeInView setIsLoading={props.setIsLoading}>
         <Wrapper source={require('../../../../imgs/landing.png')} />
       </FadeInView>
     </Container>
