@@ -13,14 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LandingPage from './pages/screens/landing';
 import RegistStackNavigationPage from './pages/navigation/RegistStackNavigation';
 
-interface ILoginDate {
-  accessToken?: string;
-  userInfo?: string;
-  setUserInfo?: any | undefined;
-  setAccessToken?: any | undefined;
-}
-
-export const GlobalContext = createContext<ILoginDate>({});
+export const GlobalContext = createContext({});
 
 interface IUserInfo {
   _id?: string;

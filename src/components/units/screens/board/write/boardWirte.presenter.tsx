@@ -1,7 +1,6 @@
 import React from 'react';
 import {Switch} from 'react-native';
 import {
-  AddImageButton,
   AddImageText,
   AddImageWrapper,
   BoardContents,
